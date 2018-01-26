@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<categories type="array">
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T16:36:26Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Drama</external-id>
+    <id type="integer">45</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">183</lft>
+    <name>Drama</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">9</position>
+    <product-count type="integer">36</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">186</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">334</thumbnail-id>
+    <title-icon-id type="integer">335</title-icon-id>
+    <updated-at type="datetime">2017-12-20T13:54:01Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T16:49:13Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Aventura</external-id>
+    <id type="integer">46</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">179</lft>
+    <name>Aventura</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">7</position>
+    <product-count type="integer">20</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">180</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">338</thumbnail-id>
+    <title-icon-id type="integer">339</title-icon-id>
+    <updated-at type="datetime">2018-01-22T10:00:05Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T16:50:06Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Comedia</external-id>
+    <id type="integer">47</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">181</lft>
+    <name>Comedia</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">8</position>
+    <product-count type="integer">21</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">182</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">341</thumbnail-id>
+    <title-icon-id type="integer">342</title-icon-id>
+    <updated-at type="datetime">2017-12-09T10:00:09Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T17:01:03Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Acci&#243;n</external-id>
+    <id type="integer">48</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">177</lft>
+    <name>Acci&#243;n</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">6</position>
+    <product-count type="integer">35</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">178</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">344</thumbnail-id>
+    <title-icon-id type="integer">345</title-icon-id>
+    <updated-at type="datetime">2018-01-18T09:06:11Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T17:13:08Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Suspenso</external-id>
+    <id type="integer">49</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">195</lft>
+    <name>Suspenso</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">14</position>
+    <product-count type="integer">9</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">196</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">348</thumbnail-id>
+    <title-icon-id type="integer">349</title-icon-id>
+    <updated-at type="datetime">2017-12-05T20:36:35Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T17:24:14Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Infantil</external-id>
+    <id type="integer">50</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">5</lft>
+    <name>Infantil</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">4</position>
+    <product-count type="integer">57</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">6</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">351</thumbnail-id>
+    <title-icon-id type="integer">352</title-icon-id>
+    <updated-at type="datetime">2017-12-21T01:57:21Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T17:36:04Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adult</external-id>
+    <id type="integer">51</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">201</lft>
+    <name>Adult</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">17</position>
+    <product-count type="integer">1</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">202</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">355</thumbnail-id>
+    <title-icon-id type="integer">356</title-icon-id>
+    <updated-at type="datetime">2017-12-05T20:36:35Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T18:23:37Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos</external-id>
+    <id type="integer">52</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">203</lft>
+    <name>Adultos</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">18</position>
+    <product-count type="integer">0</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">true</realtime>
+    <rgt type="integer">290</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">362</thumbnail-id>
+    <title-icon-id type="integer">363</title-icon-id>
+    <updated-at type="datetime">2017-12-05T20:36:35Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array">
+      <content-rating>
+        <id type="integer">18</id>
+        <name>V</name>
+        <external-id nil="true"></external-id>
+      </content-rating>
+    </content-ratings>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">687</cover-id>
+    <created-at type="datetime">2017-06-30T18:23:38Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/JOVENCITAS</external-id>
+    <id type="integer">53</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">208</lft>
+    <name>JOVENCITAS</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">3</position>
+    <product-count type="integer">5</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">209</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">364</thumbnail-id>
+    <title-icon-id type="integer">365</title-icon-id>
+    <updated-at type="datetime">2017-09-21T15:18:23Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <age-rating>
+      <id type="integer">29</id>
+      <name>adult</name>
+      <external-id nil="true"></external-id>
+    </age-rating>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T18:35:34Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Romance</external-id>
+    <id type="integer">54</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">191</lft>
+    <name>Romance</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">12</position>
+    <product-count type="integer">7</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">192</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">368</thumbnail-id>
+    <title-icon-id type="integer">369</title-icon-id>
+    <updated-at type="datetime">2017-12-18T15:33:00Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">685</cover-id>
+    <created-at type="datetime">2017-06-30T19:13:01Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/LATINAS</external-id>
+    <id type="integer">55</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">204</lft>
+    <name>LATINAS</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">1</position>
+    <product-count type="integer">11</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">205</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">375</thumbnail-id>
+    <title-icon-id type="integer">376</title-icon-id>
+    <updated-at type="datetime">2017-09-21T15:22:46Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T19:25:34Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Documental</external-id>
+    <id type="integer">56</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">187</lft>
+    <name>Documental</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">10</position>
+    <product-count type="integer">6</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">188</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">378</thumbnail-id>
+    <title-icon-id type="integer">379</title-icon-id>
+    <updated-at type="datetime">2017-12-23T10:00:06Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">686</cover-id>
+    <created-at type="datetime">2017-06-30T19:34:54Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/GAY</external-id>
+    <id type="integer">57</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">206</lft>
+    <name>GAY</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">2</position>
+    <product-count type="integer">8</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">207</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">381</thumbnail-id>
+    <title-icon-id type="integer">382</title-icon-id>
+    <updated-at type="datetime">2017-09-20T23:15:23Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">613</cover-id>
+    <created-at type="datetime">2017-06-30T20:29:43Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/EXXXTRENOS</external-id>
+    <id type="integer">58</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">210</lft>
+    <name>EXXXTRENOS</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">4</position>
+    <product-count type="integer">0</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">211</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">391</thumbnail-id>
+    <title-icon-id type="integer">392</title-icon-id>
+    <updated-at type="datetime">2017-08-09T21:16:39Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">614</cover-id>
+    <created-at type="datetime">2017-06-30T21:13:43Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/POR EL CULO</external-id>
+    <id type="integer">59</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">212</lft>
+    <name>POR EL CULO</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">5</position>
+    <product-count type="integer">1</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">213</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">399</thumbnail-id>
+    <title-icon-id type="integer">400</title-icon-id>
+    <updated-at type="datetime">2017-08-09T22:00:16Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T21:37:03Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Horror y Suspenso</external-id>
+    <id type="integer">60</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">199</lft>
+    <name>Horror y Suspenso</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">16</position>
+    <product-count type="integer">0</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">200</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">405</thumbnail-id>
+    <title-icon-id type="integer">406</title-icon-id>
+    <updated-at type="datetime">2017-12-05T20:36:35Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">1</cover-id>
+    <created-at type="datetime">2017-06-30T22:56:36Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:TEST</external-id>
+    <id type="integer">66</id>
+    <is-adult type="boolean">false</is-adult>
+    <lft type="integer">305</lft>
+    <name>TEST</name>
+    <parent-id type="integer" nil="true"></parent-id>
+    <position type="integer">21</position>
+    <product-count type="integer">5</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">316</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">432</thumbnail-id>
+    <title-icon-id type="integer">433</title-icon-id>
+    <updated-at type="datetime">2017-12-20T15:34:34Z</updated-at>
+    <parent-external-id nil="true"></parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">616</cover-id>
+    <created-at type="datetime">2017-07-01T00:37:14Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/IMPERDIBLEXXX</external-id>
+    <id type="integer">69</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">216</lft>
+    <name>IMPERDIBLEXXX</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">7</position>
+    <product-count type="integer">0</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">217</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">445</thumbnail-id>
+    <title-icon-id type="integer">446</title-icon-id>
+    <updated-at type="datetime">2017-08-09T21:40:48Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">688</cover-id>
+    <created-at type="datetime">2017-07-01T01:07:39Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/RAPIDITOS</external-id>
+    <id type="integer">70</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">220</lft>
+    <name>RAPIDITOS</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">9</position>
+    <product-count type="integer">10</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">221</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">449</thumbnail-id>
+    <title-icon-id type="integer">450</title-icon-id>
+    <updated-at type="datetime">2017-09-21T19:32:09Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+  <category>
+    <category-type>normal</category-type>
+    <cover-id type="integer">618</cover-id>
+    <created-at type="datetime">2017-07-01T04:19:16Z</created-at>
+    <description>No description</description>
+    <external-id>vodwfm:co:Adultos/LESBIANAS</external-id>
+    <id type="integer">71</id>
+    <is-adult type="boolean">true</is-adult>
+    <lft type="integer">222</lft>
+    <name>LESBIANAS</name>
+    <parent-id type="integer">52</parent-id>
+    <position type="integer">11</position>
+    <product-count type="integer">0</product-count>
+    <product-type>vod</product-type>
+    <realtime type="boolean">false</realtime>
+    <rgt type="integer">223</rgt>
+    <service-id type="integer">2</service-id>
+    <thumbnail-id type="integer">471</thumbnail-id>
+    <title-icon-id type="integer">472</title-icon-id>
+    <updated-at type="datetime">2017-10-08T13:35:55Z</updated-at>
+    <parent-external-id>vodwfm:co:Adultos</parent-external-id>
+    <service-external-id>2</service-external-id>
+    <cover-external-id nil="true"></cover-external-id>
+    <title-icon-external-id nil="true"></title-icon-external-id>
+    <thumbnail-external-id nil="true"></thumbnail-external-id>
+    <content-ratings type="array"/>
+  </category>
+</categories>

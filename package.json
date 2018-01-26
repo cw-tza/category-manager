@@ -1,0 +1,26 @@
+{
+  "name": "category-manager",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "array-to-tree": "^2.2.1",
+    "axios": "latest",
+    "body-parser": "~1.18.2",
+    "camelcase-keys": "^4.2.0",
+    "change-case": "^3.0.1",
+    "deepcopy": "^0.6.3",
+    "deepmerge": "^2.0.1",
+    "lodash": "latest",
+    "qs": "latest",
+    "traverse": "^0.6.6",
+    "xml2js": "^0.4.19",
+    "xml2js-es6-promise": "^1.1.1"
+  },
+  "devDependencies": {
+    "await-fs": "^1.0.0",
+    "jest": "^22.1.4"
+  }
+}
