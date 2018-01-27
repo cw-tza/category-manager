@@ -8,11 +8,13 @@
   "dependencies": {
     "array-to-tree": "^2.2.1",
     "axios": "latest",
+    "base-64": "^0.1.0",
     "body-parser": "~1.18.2",
     "lodash": "latest",
     "qs": "latest",
     "xml2js": "^0.4.19",
-    "xml2js-es6-promise": "^1.1.1"
+    "xml2js-es6-promise": "^1.1.1",
+    "axios-mock-adapter": "latest"
   },
   "devDependencies": {
     "await-fs": "^1.0.0",

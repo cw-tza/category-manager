@@ -1,21 +1,21 @@
 const resource = require('./data/resource');
-const parser = require('../src/mw-parser');
-const category = require('../src/category');
+const parser = require('../src/mw/parser').category;
+const category = require('../src/category-trees');
 
 let payloads;
 
 beforeAll(async () => {
+  let xmls = await resource('categories-page-1.xml',
+                            'categories-page-2.xml',
+                            'categories-page-3.xml');
 
-  let xml1 = await resource('categories-page-1.xml');
-  let xml2 = await resource('categories-page-2.xml');
-  let xml3 = await resource('categories-page-3.xml');
+  let parsed = xmls.map(async (x) => await parser.parse(x));
 
-  return await Promise.all([parser.parse(xml1), parser.parse(xml2), parser.parse(xml3)])
-                      .then(parsed => payloads = parsed.reduce((p1, p2) => p1.concat(p2)));
+  return Promise.all(parsed)
+                .then(parsedArray => payloads = parsedArray.reduce((a1, a2) => [...a1, ...a2]));
 });
 
 describe('categories tests', () => {
-
   test('should build tree from flat array', async () => {
 
     let tree = category.tree(payloads);

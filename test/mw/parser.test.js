@@ -1,5 +1,5 @@
-const resource = require('./data/resource');
-const parser = require('../src/mw-parser');
+const resource = require('../data/resource');
+const parser = require('../../src/mw/parser').category;
 
 describe('parse tests', () => {
 

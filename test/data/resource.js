@@ -1,3 +1,4 @@
 const fs = require('await-fs');
 
-module.exports = async (file) => await fs.readFile(`test/data/${file}`, 'utf-8');
+module.exports =
+    async (...files) => await Promise.all(files.map(file => fs.readFile(`test/data/${file}`, 'utf-8')));

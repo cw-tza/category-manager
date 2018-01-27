@@ -18,13 +18,20 @@ const presets = {
   }
 };
 
-async function parse(xml, opts = presets.clean) {
+class Parser {
 
-  const parsed = await xml2js(xml, opts);
+  constructor(type) {
+    this.type = type;
+  }
 
-  return parsed ? parsed.category : [];
+  async parse(xml, opts = presets.clean) {
+
+    const parsed = await xml2js(xml, opts);
+
+    return _.isNil(parsed) ? [] : parsed[this.type];
+  }
 }
 
 module.exports = {
-  parse: parse,
+  category: new Parser('category'),
 };
