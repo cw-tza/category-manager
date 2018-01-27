@@ -1,60 +1,77 @@
 const _ = require('lodash');
-const traverse = require('traverse');
-const copy = require('deepcopy');
+const arrayToTree = require('array-to-tree');
+const ROOT_ID = -1;
 
-const predicate = query => _.isFunction(query) ? query : (object => _.isMatch(object, query));
+const DEFAULT_OPTS = {
+  dataKey: '$',
+  index  : category => category.name.toLowerCase()
+};
 
-class Category {
+function tree(mwCategories, opts = DEFAULT_OPTS) {
 
-  constructor(params, children) {
+  const withRootIds = mwCategories.map(mwCat => ({...mwCat, parentId: mwCat.parentId || ROOT_ID}));
+  const topLevel = arrayToTree(withRootIds, {parentProperty: 'parentId', rootID: ROOT_ID});
 
-    this.id = params.id;
-    this.parentId = params.parentId;
-    this.externalId = params.externalId;
-    this.name = params.name;
-    this.categoryType = params.categoryType;
-    this.isAdult = params.isAdult;
-    this.ageRating = params.ageRating;
-    this.coverId = params.coverId;
-    this.position = params.position;
-    this.serviceId = params.serviceId;
-    this.children = children || [];
-  }
+  return topLevel.map(top => indexed(top, opts)).reduce(_.merge, {});
+}
 
-  child(query) {
+function indexed(category, opts = DEFAULT_OPTS) {
 
-    return _.find(this.children, predicate(query));
-  }
+  const indexChildren = children => children.map(c => indexed(c, opts)).reduce(_.merge, {});
+  const mappedCategory = {...indexChildren(category.children || []), [opts.dataKey]: _.omit(category, 'children')};
+  const catIndex = opts.index(category);
 
-  get isRoot() {
-    return _.toBoolean(this.parentId);
-  }
+  return {[catIndex]: mappedCategory}
+}
 
-  get isLeaf() {
+function pathAsTree(path) {
 
-    return _.isEmpty(children);
-  }
+  const joinChild = (last, next) => ({...next, children: [last]});
 
-  index(indexFn) {
+  const branch = [].concat(path.split('/')
+                               .map(name => ({name: name}))
+                               .map(cat => ({...cat, adi: true}))
+                               .reduceRight(joinChild));
 
-    function indexer(node) {
+  return indexed(branch[0], DEFAULT_OPTS)
+}
 
-      if (this.notRoot && this.parent.key === 'children') {
-        this.update({[indexFn(node)]: node})
+function merge(mwTree, ...pathTrees) {
+
+  return cascadeData([...pathTrees, mwTree].reduce(_.merge));
+}
+
+function cascadeData(tree) {
+
+  return _.mapValues(tree, category => cascadeData(category));
+
+  function cascadeData(category, parent = {$: {id: null, isAdult: false, externalId: null}}) {
+
+    const children = _.mapValues(_.omit(category, '$'), child => cascadeData(child, category));
+
+    return {
+      $: mergeParentData(category.$, parent.$),
+      ...children
+    };
+
+    function mergeParentData(data, parentData) {
+
+      return {
+        ...data,
+        adi             : data.adi && _.isNil(data.id),
+        parentId        : data.parentId || parentData.id,
+        parentExternalId: data.parentExternalId || parentData.externalId,
+        isAdult         : data.isAdult || parentData.isAdult
       }
     }
-    const indexed = traverse(this).map(indexer);
-    return {[indexFn(this)]: indexed};
   }
 }
 
-const c = new Category({id: 3, name: 'c', parentId: 1});
-const d = new Category({id: 4, name: 'd', parentId: 2});
-const e = new Category({id: 5, name: 'e', parentId: 2});
-const b = new Category({id: 2, name: 'b', parentId: 1}, [d, e]);
-const a = new Category({id: 1, name: 'a'}, [b, c]);
+function search(tree, ...paths) {
 
+  const pathArrays = paths.map(path => path.split('/').map(name => name.toLowerCase()));
 
-const aaa= a.index(x=>x.name);
-console.dir(aaa)
-module.exports = Category;
+  return _.at(tree, pathArrays);
+}
+
+module.exports = {tree, pathAsTree, merge, search};
