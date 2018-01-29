@@ -1,11 +1,11 @@
-const resource = require('../data/resource');
+const testdata = require('../data/test-data');
 const parser = require('../../src/mw/parser').category;
 
 describe('parse tests', () => {
 
   test('should parse response payload', async () => {
 
-    let xml1 = await resource('categories-page-1.xml');
+    let xml1 = await testdata('categories-page-1.xml');
 
     let parsed = await parser.parse(xml1);
 
@@ -15,7 +15,7 @@ describe('parse tests', () => {
 
   test('should parse empty response payload', async () => {
 
-    let emptyXml = await resource('categories-page-3.xml');
+    let emptyXml = await testdata('categories-page-3.xml');
 
     let parsed = await parser.parse(emptyXml);
 

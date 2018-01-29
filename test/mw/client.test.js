@@ -1,4 +1,4 @@
-const resource = require('../data/resource');
+const testdata = require('../data/test-data');
 const mwClient = require('../../src/mw/client')
 const Client = mwClient.Client;
 const MockAdapter = require('axios-mock-adapter');
@@ -11,7 +11,7 @@ describe('mw category client tests', () => {
 
   let client = new Client(axios), categoryPages;
 
-  beforeAll(async () => categoryPages = await resource(
+  beforeAll(async () => categoryPages = await testdata(
       'categories-page-1.xml',
       'categories-page-2.xml',
       'categories-page-3.xml'
@@ -19,7 +19,7 @@ describe('mw category client tests', () => {
 
   afterEach(mock.reset);
 
-  test('should load all categories on all', async () => {
+  test('should load all category pages on client.all', async () => {
 
     mock.onGet('/categories', page(1))
         .reply(200, categoryPages[0])
@@ -33,7 +33,7 @@ describe('mw category client tests', () => {
     expect(categories).toHaveLength(30);
   });
 
-  test('should parse non empty response payload', async () => {
+  test('should fetch and parse non empty response payload', async () => {
 
     mock.onGet('/categories', page(2))
         .reply(200, categoryPages[1]);
@@ -43,7 +43,7 @@ describe('mw category client tests', () => {
     expect(categories).toHaveLength(10);
   });
 
-  test('should parse empty response payload', async () => {
+  test('should fetch and parse empty response payload', async () => {
 
     mock.onGet('/categories', page(3))
         .reply(200, categoryPages[1]);

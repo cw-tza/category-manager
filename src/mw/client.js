@@ -27,13 +27,17 @@ class Client {
                                 headers: opts.headers,
                                 params : opts.params
                               });
-    this.axios
-        .interceptors
-        .request
-        .use(config => config);
-
     this.resource = opts.resource;
     this.path = '/' + this.resource;
+    setupInterceptors(this.axios);
+
+    function setupInterceptors(axiosClient) {
+
+      axiosClient
+          .interceptors
+          .request
+          .use(config => config);
+    }
   }
 
   async get(params = {}) {
@@ -43,17 +47,20 @@ class Client {
                .then(result => parser.parse(result.data))
   }
 
-  async next(page) {
-
-    let results = await this.get({page: page});
-
-    return results.length === 0 ? results :
-           [...results, ...(await this.next(page + 1))]
-  }
-
   async all() {
 
-    return await this.next(1);
+    const nextPage = async(page) => {
+
+      let results = await this.get({page: page});
+
+      if(results.length > 0) {
+        results = results.concat(await nextPage(page + 1))
+      }
+
+      return results;
+    };
+
+    return await nextPage(1);
   }
 }
 

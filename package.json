@@ -10,14 +10,21 @@
     "axios": "latest",
     "base-64": "^0.1.0",
     "body-parser": "~1.18.2",
+    "boom": "^7.1.1",
+    "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
+    "koa-logger": "^3.1.0",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.3.0",
     "lodash": "latest",
     "qs": "latest",
+    "semaphore": "^1.1.0",
     "xml2js": "^0.4.19",
-    "xml2js-es6-promise": "^1.1.1",
-    "axios-mock-adapter": "latest"
+    "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
     "await-fs": "^1.0.0",
-    "jest": "^22.1.4"
+    "jest": "^22.1.4",
+    "axios-mock-adapter": "latest"
   }
 }

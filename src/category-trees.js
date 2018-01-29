@@ -36,7 +36,7 @@ function pathAsTree(path) {
   return indexed(branch[0], DEFAULT_OPTS)
 }
 
-function merge(mwTree, ...pathTrees) {
+function merge(mwTree, pathTrees) {
 
   return cascadeData([...pathTrees, mwTree].reduce(_.merge));
 }
@@ -45,14 +45,13 @@ function cascadeData(tree) {
 
   return _.mapValues(tree, category => cascadeData(category));
 
-  function cascadeData(category, parent = {$: {id: null, isAdult: false, externalId: null}}) {
+  function cascadeData(category, parent = {$: {id: null, isAdult: false, parentId: null, externalId: null}}) {
+
+    const $ = mergeParentData(category.$, parent.$);
 
     const children = _.mapValues(_.omit(category, '$'), child => cascadeData(child, category));
 
-    return {
-      $: mergeParentData(category.$, parent.$),
-      ...children
-    };
+    return {$, ...children};
 
     function mergeParentData(data, parentData) {
 

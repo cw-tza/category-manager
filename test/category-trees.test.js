@@ -1,28 +1,33 @@
-const resource = require('./data/resource');
+const testdata = require('./data/test-data');
 const parser = require('../src/mw/parser').category;
 const category = require('../src/category-trees');
+const util = require('../src/util');
 
 let payloads;
 
 beforeAll(async () => {
-  let xmls = await resource('categories-page-1.xml',
-                            'categories-page-2.xml',
-                            'categories-page-3.xml');
 
-  let parsed = xmls.map(async (x) => await parser.parse(x));
+  let files = await testdata(
+      'categories-page-1.xml',
+      'categories-page-2.xml',
+      'categories-page-3.xml'
+  );
 
-  return Promise.all(parsed)
-                .then(parsedArray => payloads = parsedArray.reduce((a1, a2) => [...a1, ...a2]));
+  let parsed = files.map(file => parser.parse(file));
+  let categories = await Promise.all(parsed);
+
+  payloads = util.flatten(categories);
 });
 
-describe('categories tests', () => {
+describe('category-tree tests', () => {
+
   test('should build tree from flat array', async () => {
 
     let tree = category.tree(payloads);
 
     expect(tree).toBeDefined();
-    expect(tree.drama).toBeDefined();
-    expect(tree.drama.$).toBeDefined()
+    expect(tree['drama']).toBeDefined();
+    expect(tree['drama'].$).toBeDefined()
   });
 
   test('should index mw tree', async () => {
@@ -44,7 +49,7 @@ describe('categories tests', () => {
     let mwTree = category.tree(payloads);
     let pathTree = category.pathAsTree('Adultos/Latinas/BIZARRE');
 
-    let mergedTree = category.merge(mwTree, pathTree);
+    let mergedTree = category.merge(mwTree, [pathTree]);
 
     const isAdult = mergedTree['adultos']['latinas']['bizarre'].$.isAdult;
 
@@ -57,7 +62,7 @@ describe('categories tests', () => {
     let pathTree = category.pathAsTree('Adultos/Latinas/BIZARRE');
     let pathTree2 = category.pathAsTree('Adultos/Nuevo/Superiore');
 
-    let merged = category.merge(mwTree, pathTree, pathTree2);
+    let merged = category.merge(mwTree, [pathTree, pathTree2]);
 
     let searched = category.search(merged, 'Adultos/Latinas/BIZARRE', 'Adultos/Nuevo', 'x/z/a/s', 'Drama');
 
