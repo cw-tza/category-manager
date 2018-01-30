@@ -20,24 +20,23 @@ router.post('/category-paths', async (ctx) => {
   let paths = ctx.request.body;
 
   let mwTree = catTree.tree(await client.all());
-  let merged = catTree.merge(mwTree, catTree(paths.map(catTree.pathAsTree)));
+  let merged = catTree.merge(mwTree, ...paths.map(catTree.pathAsTree));
   let unsynced = catTree.treeFilter(merged, cat => cat.$.adi);
 
-  let synced = await syncRemaining(unsynced, []);
+  ctx.body = await syncRemaining(unsynced, []);
 
-  ctx.body = {synced};
+  async function syncRemaining(remaining, synced) {
+
+    if (!remaining.length) {
+      return synced;
+    }
+
+    let next = remaining.pop();
+    await client.sync(next.$);
+
+    return await syncRemaining(remaining, [...synced, next]);
+  }
 });
-
-async function syncRemaining(remaining, synced) {
-
-  if (remaining.length)
-    return synced;
-
-  let next = remaining.shift();
-  await client.sync(next.$);
-
-  return await syncRemaining(remaining, [...synced, next]);
-}
 
 router.get('/', async ctx => {
   ctx.body = {

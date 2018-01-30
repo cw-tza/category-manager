@@ -73,9 +73,9 @@ describe('mw category client tests', () => {
     let data = {name: 'foo', externalId: 'ext-foo', isAdult: false, id: 1};
     let data2 = {name: 'foo2', externalId: 'ext-foo2', isAdult: false, id: 2, parentExternalId: 'ext-bar'};
 
-    mock.onPut('/categories', Client.payload(data))
+    mock.onPut('/categories/1', Client.payload(data))
         .reply(204, '')
-        .onPut('/categories', Client.payload(data2))
+        .onPut('/categories/2', Client.payload(data2))
         .reply(204, '');
 
     await client.sync(data);

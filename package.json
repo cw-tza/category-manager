@@ -8,6 +8,7 @@
   "dependencies": {
     "array-to-tree": "^2.2.1",
     "axios": "latest",
+    "axios-debug-log": "^0.4.0",
     "base-64": "^0.1.0",
     "body-parser": "~1.18.2",
     "boom": "^7.1.1",
@@ -19,9 +20,9 @@
     "lodash": "latest",
     "qs": "latest",
     "semaphore": "^1.1.0",
+    "uuid": "latest",
     "xml2js": "^0.4.19",
-    "xml2js-es6-promise": "^1.1.1",
-    "uuid": "latest"
+    "xml2js-es6-promise": "^1.1.1"
   },
   "devDependencies": {
     "await-fs": "^1.0.0",
