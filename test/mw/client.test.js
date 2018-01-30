@@ -1,14 +1,14 @@
 const testdata = require('../data/test-data');
 const Client = require('../../src/mw/client');
 const MockAdapter = require('axios-mock-adapter');
-const axios = require('axios');
-const mock = new MockAdapter(axios);
+const generate = require('../../src/mw/xml-generator');
 
 describe('mw category client tests', () => {
 
   const page = pageNo => ({params: {identifier_type: 'external_id', page: pageNo}});
 
-  let client = new Client(axios, 'categories', {baseURL: 'http://mock/', token: 'token'}), categoryPages;
+  let client = new Client('http://mock/', 'categories', 'token'), categoryPages;
+  const mock = new MockAdapter(client.axios);
 
   beforeAll(async () => categoryPages = await testdata(
     'categories-page-1.xml',
@@ -54,16 +54,16 @@ describe('mw category client tests', () => {
 
   test('should post when id undefined', async () => {
 
-    let data = {name: 'foo', parentExternalId: 'ext-bar', externalId: 'ext-foo', isAdult: false};
-    let data2 = {name: 'foo2', externalId: 'ext-foo2', isAdult: false};
+    let data = {$:{name: 'foo', parentExternalId: 'ext-bar', externalId: 'ext-foo', isAdult: false}};
+    let data2 = {$:{name: 'foo2', externalId: 'ext-foo2', isAdult: false}};
 
-    mock.onPost('/categories', Client.payload(data))
+    mock.onPost('/categories', generate(data))
         .reply(201, '')
-        .onPost('/categories', Client.payload(data2))
+        .onPost('/categories', generate(data2))
         .reply(201, '');
 
     await client.sync(data);
-    let status =  await client.sync(data2);
+    let status = await client.sync(data2);
 
     expect(status).toBeDefined()
   });
@@ -73,13 +73,13 @@ describe('mw category client tests', () => {
     let data = {name: 'foo', externalId: 'ext-foo', isAdult: false, id: 1};
     let data2 = {name: 'foo2', externalId: 'ext-foo2', isAdult: false, id: 2, parentExternalId: 'ext-bar'};
 
-    mock.onPut('/categories/1', Client.payload(data))
+    mock.onPut('/categories/1', generate({$:data}))
         .reply(204, '')
-        .onPut('/categories/2', Client.payload(data2))
+        .onPut('/categories/2', generate({$:data2}))
         .reply(204, '');
 
-    await client.sync(data);
-    let status = await client.sync(data2);
+    await client.sync({$:data});
+    let status = await client.sync({$:data2});
 
     expect(status).toBeDefined()
   });

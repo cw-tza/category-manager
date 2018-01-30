@@ -1,5 +1,5 @@
 const testdata = require('./data/test-data');
-const parser = require('../src/mw/parser').category;
+const parse = require('../src/mw/xml-parser');
 const catTrees = require('../src/category-trees');
 const util = require('../src/util');
 const _ = require('lodash');
@@ -14,7 +14,8 @@ beforeAll(async () => {
     'categories-page-3.xml'
   );
 
-  let parsed = files.map(file => parser.parse(file));
+  let parsed = files.map(file => parse(file));
+
   let categories = await Promise.all(parsed);
 
   payloads = util.flatten(categories);

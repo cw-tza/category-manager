@@ -1,4 +1,4 @@
-const generator = require('../../src/mw/xml-generator').category;
+const generate = require('../../src/mw/xml-generator');
 
 describe('generate tests', () => {
 
@@ -15,7 +15,7 @@ describe('generate tests', () => {
       }
     };
 
-    let generated = await generator.generate(data);
+    let generated = await generate(data);
 
     expect(generated).toContain(`<id type="integer">${data.$.id}</id>`);
     expect(generated).toContain(`<parent-id type="integer">${data.$.parentId}</parent-id>`);

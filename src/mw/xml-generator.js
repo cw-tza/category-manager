@@ -1,38 +1,27 @@
 const xml2js = require('xml2js');
 const _ = require('lodash');
 
-const presets = {
-    rootName: 'category'
-};
+const generate = (category) => {
 
-class XmlGenerator {
+  const builder = new xml2js.Builder({rootName: 'category'});
+  const remapped = remap({$: category.$});
+  return builder.buildObject(remapped);
 
-  constructor(type) {
-    this.type = type;
-  }
+  function remap(category) {
 
-  generate(category, opts = presets) {
+    const attrs = (val, type) => ({$: _.isNil(val) ? {nil: true} : _.isNil(type) ? {} : {type: type}});
 
-    const builder = new xml2js.Builder(opts);
-    const remapped = this.remap({$: category.$});
-    return builder.buildObject(remapped);
-  }
-
-  remap(category) {
-
-    const attrs = (val, type) => ({$: _.isNil(val) ? {nil: true} : _.isNil(type) ? {}:{type:type}});
-
-    const mapField = (val, type) => ({...attrs(val, type), _: _.defaultTo(val,'')});
+    const mapField = (val, type) => ({...attrs(val, type), _: _.defaultTo(val, '')});
 
     return _.mapKeys({
-      id              : mapField(category.$.id, 'integer'),
-      parentId        : mapField(category.$.parentId, 'integer'),
-      isAdult         : mapField(category.$.isAdult, 'boolean'),
-      name            : category.$.name,
-      externalId      : mapField(category.$.externalId),
-      parentExternalId: mapField(category.$.parentExternalId)
-    }, (val, key)=>_.kebabCase(key));
+                       id              : mapField(category.$.id, 'integer'),
+                       parentId        : mapField(category.$.parentId, 'integer'),
+                       isAdult         : mapField(category.$.isAdult, 'boolean'),
+                       name            : category.$.name,
+                       externalId      : mapField(category.$.externalId),
+                       parentExternalId: mapField(category.$.parentExternalId)
+                     }, (val, key) => _.kebabCase(key));
   }
-}
+};
 
-module.exports = {category: new XmlGenerator('category')};
+module.exports = generate;

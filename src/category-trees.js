@@ -1,11 +1,20 @@
 const _ = require('lodash');
 const arrayToTree = require('array-to-tree');
 const uuid = require('uuid/v4');
-const ROOT_ID = -1;
+
+module.exports = {
+  tree,
+  pathAsTree,
+  merge,
+  search,
+  treeFilter
+};
 
 const indexByNameToLowerCase = category => category.name.toLowerCase();
 
 function tree(mwCategories, indexFn = indexByNameToLowerCase) {
+
+  const ROOT_ID = -1;
 
   const withRootIds = mwCategories.map(mwCat => _.defaults(mwCat, {parentId: ROOT_ID}));
 
@@ -100,5 +109,3 @@ function treeFilter(tree, predicate) {
           .flatMapDeep(childFilter)
           .value();
 }
-
-module.exports = {tree, pathAsTree, merge, search, treeFilter};

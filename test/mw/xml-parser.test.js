@@ -1,5 +1,5 @@
 const testdata = require('../data/test-data');
-const parser = require('../../src/mw/parser').category;
+const parse = require('../../src/mw/xml-parser');
 
 describe('parse tests', () => {
 
@@ -7,7 +7,7 @@ describe('parse tests', () => {
 
     let xml1 = await testdata('categories-page-1.xml');
 
-    let parsed = await parser.parse(xml1);
+    let parsed = await parse(xml1);
 
     expect(parsed).toBeDefined();
     expect(parsed).toHaveLength(20);
@@ -17,7 +17,7 @@ describe('parse tests', () => {
 
     let emptyXml = await testdata('categories-page-3.xml');
 
-    let parsed = await parser.parse(emptyXml);
+    let parsed = await parse(emptyXml);
 
     expect(parsed).toBeDefined();
     expect(parsed).toHaveLength(0);
