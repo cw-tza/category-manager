@@ -3,7 +3,6 @@ const Router = require('koa-router');
 const Client = require('../mw/client');
 const axios = require('axios');
 const catTree = require('../category-trees');
-const sem = require('semaphore')(1);
 
 const router = new Router();
 
@@ -18,30 +17,27 @@ router.get('/middleware-categories', async ctx => {
 
 router.post('/category-paths', async (ctx) => {
 
-
   let paths = ctx.request.body;
 
-  let pathTrees = paths.map(path => catTree.pathAsTree(path));
   let mwTree = catTree.tree(await client.all());
-  let merged = catTree.merge(mwTree, pathTrees);
+  let merged = catTree.merge(mwTree, catTree(paths.map(catTree.pathAsTree)));
+  let unsynced = catTree.treeFilter(merged, cat => cat.$.adi);
 
-  let unsynced = catTree.collectAdiChildren(merged);
+  let synced = await syncRemaining(unsynced, []);
 
-  await syncRemaining(unsynced);
-
-  async function syncRemaining(remaining) {
-
-    if (!remaining.length) {
-      return;
-    }
-
-    await client.sync(remaining.shift());
-
-    return syncRemaining(remaining);
-  }
-
-  ctx.body = merged;
+  ctx.body = {synced};
 });
+
+async function syncRemaining(remaining, synced) {
+
+  if (remaining.length)
+    return synced;
+
+  let next = remaining.shift();
+  await client.sync(next.$);
+
+  return await syncRemaining(remaining, [...synced, next]);
+}
 
 router.get('/', async ctx => {
   ctx.body = {

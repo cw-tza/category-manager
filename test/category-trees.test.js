@@ -9,9 +9,9 @@ let payloads;
 beforeAll(async () => {
 
   let files = await testdata(
-      'categories-page-1.xml',
-      'categories-page-2.xml',
-      'categories-page-3.xml'
+    'categories-page-1.xml',
+    'categories-page-2.xml',
+    'categories-page-3.xml'
   );
 
   let parsed = files.map(file => parser.parse(file));
@@ -50,7 +50,7 @@ describe('category-tree tests', () => {
     let mwTree = catTrees.tree(payloads);
     let pathTree = catTrees.pathAsTree('Adultos/Latinas/BIZARRE');
 
-    let mergedTree = catTrees.merge(mwTree, [pathTree]);
+    let mergedTree = catTrees.merge(mwTree, pathTree);
 
     const isAdult = mergedTree['adultos']['latinas']['bizarre'].$.isAdult;
 
@@ -63,7 +63,7 @@ describe('category-tree tests', () => {
     let pathTree = catTrees.pathAsTree('Adultos/Latinas/BIZARRE');
     let pathTree2 = catTrees.pathAsTree('Adultos/Nuevo/Superiore');
 
-    let merged = catTrees.merge(mwTree, [pathTree, pathTree2]);
+    let merged = catTrees.merge(mwTree, pathTree, pathTree2);
 
     let searched = catTrees.search(merged, 'Adultos/Latinas/BIZARRE', 'Adultos/Nuevo', 'x/z/a/s', 'Drama');
 
@@ -95,15 +95,16 @@ describe('category-tree tests', () => {
     };
 
     const pathTrees = paths.map(catTrees.pathAsTree);
-    const merged = catTrees.merge(mwTree, pathTrees);
+    const merged = catTrees.merge(mwTree, ...pathTrees);
 
-    const adiChildren = catTrees.collectAdiChildren(merged);
+    const filtered = catTrees.treeFilter(merged, cat => cat.$.adi);
+    const adiChildren = _.flattenDeep(filtered).map(c => c.$);
     expect(adiChildren).toHaveLength(7);
 
     const aaa = _.find(adiChildren, {name: 'AAA'});
     const bbb = _.find(adiChildren, {name: 'BBB'});
     const ccc = _.find(adiChildren, {name: 'CCC'});
-    const foobar= _.find(adiChildren, {name: 'foobar'});
+    const foobar = _.find(adiChildren, {name: 'foobar'});
     const barfoo = _.find(adiChildren, {name: 'barfoo'});
     const zzz = _.find(adiChildren, {name: 'ZZZ'});
 

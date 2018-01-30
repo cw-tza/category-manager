@@ -54,25 +54,33 @@ describe('mw category client tests', () => {
 
   test('should post when id undefined', async () => {
 
-    let data = {name: 'foo', externalId: 'ext-foo', isAdult: false};
+    let data = {name: 'foo', parentExternalId: 'ext-bar', externalId: 'ext-foo', isAdult: false};
+    let data2 = {name: 'foo2', externalId: 'ext-foo2', isAdult: false};
 
     mock.onPost('/categories', Client.payload(data))
+        .reply(201, '')
+        .onPost('/categories', Client.payload(data2))
         .reply(201, '');
 
-    let post = await client.sync(data);
+    await client.sync(data);
+    let status =  await client.sync(data2);
 
-    expect(post).toBeDefined()
+    expect(status).toBeDefined()
   });
 
-  test('should post when id undefined', async () => {
+  test('should put when id is defined', async () => {
 
-    let data = {name: 'foo', externalId: 'ext-foo', isAdult: false, id:1};
+    let data = {name: 'foo', externalId: 'ext-foo', isAdult: false, id: 1};
+    let data2 = {name: 'foo2', externalId: 'ext-foo2', isAdult: false, id: 2, parentExternalId: 'ext-bar'};
 
     mock.onPut('/categories', Client.payload(data))
+        .reply(204, '')
+        .onPut('/categories', Client.payload(data2))
         .reply(204, '');
 
-    let post = await client.sync(data);
+    await client.sync(data);
+    let status = await client.sync(data2);
 
-    expect(post).toBeDefined()
+    expect(status).toBeDefined()
   });
 });
