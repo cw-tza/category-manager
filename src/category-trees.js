@@ -3,30 +3,30 @@ const arrayToTree = require('array-to-tree');
 const uuid = require('uuid/v4');
 const ROOT_ID = -1;
 
-const DEFAULT_OPTS = {
-  dataKey: '$',
-  index  : category => category.name.toLowerCase()
-};
+const indexByNameToLowerCase = category => category.name.toLowerCase();
 
-function tree(mwCategories, opts = DEFAULT_OPTS) {
+function tree(mwCategories, indexFn = indexByNameToLowerCase) {
 
   const withRootIds = mwCategories.map(mwCat => _.defaults(mwCat, {parentId: ROOT_ID}));
+
   const topLevel = arrayToTree(withRootIds, {parentProperty: 'parentId', rootID: ROOT_ID});
 
-  return topLevel.reduce((old, top) => ({...old, ...indexed(top, opts)}), {});
+  return _.toArray(topLevel)
+          .map(top => indexed(top, indexFn))
+          .reduce(_.merge)
 }
 
-function indexed(category, opts = DEFAULT_OPTS) {
+function indexed(category, indexFn = indexByNameToLowerCase) {
 
-  const indexChildren = children => children.map(c => indexed(c, opts))
+  const indexChildren = children => children.map(c => indexed(c, indexFn))
                                             .reduce(_.merge, {});
 
   const mappedCategory = {
     ...indexChildren(_.toArray(category.children)),
-    [opts.dataKey]: _.omit(category, 'children')
+    ['$']: _.omit(category, 'children')
   };
 
-  const catIndex = opts.index(category);
+  const catIndex = indexFn(category);
 
   return {[catIndex]: mappedCategory}
 }
@@ -41,17 +41,12 @@ function pathAsTree(path) {
                                .reduceRight(joinChild)
   );
 
-  return indexed(branch[0], DEFAULT_OPTS)
+  return indexed(branch[0])
 }
 
 function merge(mwTree, ...pathTrees) {
 
-  return cascadeData([...pathTrees, mwTree].reduce(_.merge));
-}
-
-function cascadeData(tree) {
-
-  let topLevelParentData = {
+  let rootParentData = {
     id              : null,
     isAdult         : false,
     parentId        : null,
@@ -59,11 +54,18 @@ function cascadeData(tree) {
     parentExternalId: null
   };
 
-  return _.mapValues(tree, cat => cascadeData(cat, topLevelParentData));
+  return _.mapValues([...pathTrees, mwTree].reduce(_.merge), cat => cascadeData(cat, rootParentData));
 
   function cascadeData(category, parentData) {
 
-    const $ = mergeParentData(category.$, parentData);
+    const $ = {
+      ...category.$,
+      adi             : category.$.adi || false,
+      externalId      : category.$.externalId || uuid(),
+      parentId        : category.$.parentId || parentData.id,
+      parentExternalId: category.$.parentExternalId || parentData.externalId,
+      isAdult         : category.$.isAdult || parentData.isAdult
+    };
 
     const children = _.chain(category)
                       .omit('$')
@@ -71,18 +73,6 @@ function cascadeData(tree) {
                       .value();
 
     return {$, ...children};
-
-    function mergeParentData(data, parentData) {
-
-      return {
-        ...data,
-        adi             : data.adi || false,
-        externalId      : data.externalId || uuid(),
-        parentId        : data.parentId || parentData.id,
-        parentExternalId: data.parentExternalId || parentData.externalId,
-        isAdult         : data.isAdult || parentData.isAdult
-      }
-    }
   }
 }
 
