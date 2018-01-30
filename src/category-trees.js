@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const arrayToTree = require('array-to-tree');
+const uuid = require('uuid/v4');
 const ROOT_ID = -1;
 
 const DEFAULT_OPTS = {
@@ -45,11 +46,11 @@ function cascadeData(tree) {
 
   return _.mapValues(tree, category => cascadeData(category));
 
-  function cascadeData(category, parent = {$: {id: null, isAdult: false, parentId: null, externalId: null}}) {
+  function cascadeData(category, parentData = {id: null, isAdult: false, parentId: null, externalId: null}) {
 
-    const $ = mergeParentData(category.$, parent.$);
+    const $ = mergeParentData(category.$, parentData);
 
-    const children = _.mapValues(_.omit(category, '$'), child => cascadeData(child, category));
+    const children = _.mapValues(_.omit(category, '$'), child => cascadeData(child, $));
 
     return {$, ...children};
 
@@ -57,7 +58,8 @@ function cascadeData(tree) {
 
       return {
         ...data,
-        adi             : data.adi && _.isNil(data.id),
+        adi             : data.adi || false,
+        externalId      : data.externalId || uuid(),
         parentId        : data.parentId || parentData.id,
         parentExternalId: data.parentExternalId || parentData.externalId,
         isAdult         : data.isAdult || parentData.isAdult
@@ -73,4 +75,29 @@ function search(tree, ...paths) {
   return _.at(tree, pathArrays);
 }
 
-module.exports = {tree, pathAsTree, merge, search};
+function collectAdiChildren(tree) {
+
+  const isAdiChild = value => value.$.adi;
+
+  function adiChildren(cat) {
+
+    return _.chain(cat)
+            .omit('$')
+            .pickBy(isAdiChild)
+            .mapValues(adiChildren)
+            .values()
+            .value()
+            .concat(cat);
+  }
+
+  return _.chain(tree)
+          .pickBy(isAdiChild)
+          .mapValues(adiChildren)
+          .values()
+          .flattenDeep()
+          .map('$')
+          .value();
+}
+
+
+module.exports = {tree, pathAsTree, merge, search, collectAdiChildren};

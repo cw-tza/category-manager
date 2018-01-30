@@ -20,7 +20,8 @@
     "qs": "latest",
     "semaphore": "^1.1.0",
     "xml2js": "^0.4.19",
-    "xml2js-es6-promise": "^1.1.1"
+    "xml2js-es6-promise": "^1.1.1",
+    "uuid": "latest"
   },
   "devDependencies": {
     "await-fs": "^1.0.0",

@@ -1,42 +1,35 @@
 const base64 = require('base-64');
 const parser = require('./parser').category;
 
-const DEFAULT_OPTS = {
-  token   : 'f244pcHzIBKFqWXUj4u',
-  resource: 'categories',
-  baseURL : 'http://localhost:20007/rest',
-  params  : {
+const opts = (connectOpts) => ({
+  baseURL: connectOpts.baseURL,
+  params : {
     identifier_type: 'external_id',
   },
-};
-
-const DEFAULT_HEADERS = {
-  common: {
-    'Authorization': `Basic ${base64.encode(DEFAULT_OPTS.token)}`,
-    'Content-type' : 'application/xml',
-    'Accept'       : 'application/xml'
+  headers: {
+    common: {
+      'Authorization': `Basic ${base64.encode(connectOpts.token)}`,
+      'Content-type' : 'application/xml',
+      'Accept'       : 'application/xml'
+    }
   }
-};
+});
 
 class Client {
 
-  constructor(axios, opts = {...DEFAULT_OPTS, headers: DEFAULT_HEADERS}) {
+  constructor(axios, resource, connectOpts = {}) {
 
-    this.axios = axios.create({
-                                baseURL: opts.baseURL,
-                                headers: opts.headers,
-                                params : opts.params
-                              });
-    this.resource = opts.resource;
+    this.axios = axios.create(opts(connectOpts));
+    this.resource = resource;
     this.path = '/' + this.resource;
     setupInterceptors(this.axios);
 
     function setupInterceptors(axiosClient) {
 
       axiosClient
-          .interceptors
-          .request
-          .use(config => config);
+        .interceptors
+        .request
+        .use(config => config);
     }
   }
 
@@ -47,13 +40,34 @@ class Client {
                .then(result => parser.parse(result.data))
   }
 
+  async sync(data, params = {}) {
+
+    const syncFn = data.id ? this.axios.put : this.axios.post;
+
+    return await syncFn(this.path, Client.payload(data), {params})
+        .then(result => result.status);
+  }
+
+  static payload(data) {
+
+    return `<category>
+                <cover-id type="integer">1</cover-id>
+                <name>${data.name}</name>
+                <service-id type="integer">2</service-id>
+                <is-adult type="boolean">${data.isAdult}</is-adult>
+                <external-id>${data.externalId}</external-id>` +
+           (data.parentExternalId ? '' : `<parent-external-id>${data.parentExternalId}</parent-external-id>`) +
+           (data.id ? '' : `<id type="integer">${data.id}</id>`) +
+           `</category>`;
+  }
+
   async all() {
 
-    const nextPage = async(page) => {
+    const nextPage = async (page) => {
 
       let results = await this.get({page: page});
 
-      if(results.length > 0) {
+      if (results.length > 0) {
         results = results.concat(await nextPage(page + 1))
       }
 
@@ -64,4 +78,4 @@ class Client {
   }
 }
 
-module.exports = {Client, defaults: {...DEFAULT_OPTS, headers: DEFAULT_HEADERS}};
+module.exports = Client;

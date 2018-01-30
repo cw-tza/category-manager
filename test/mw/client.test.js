@@ -1,20 +1,19 @@
 const testdata = require('../data/test-data');
-const mwClient = require('../../src/mw/client')
-const Client = mwClient.Client;
+const Client = require('../../src/mw/client');
 const MockAdapter = require('axios-mock-adapter');
 const axios = require('axios');
 const mock = new MockAdapter(axios);
 
 describe('mw category client tests', () => {
 
-  const page = pageNo => ({params: {...mwClient.defaults.params, page: pageNo}});
+  const page = pageNo => ({params: {identifier_type: 'external_id', page: pageNo}});
 
-  let client = new Client(axios), categoryPages;
+  let client = new Client(axios, 'categories', {baseURL: 'http://mock/', token: 'token'}), categoryPages;
 
   beforeAll(async () => categoryPages = await testdata(
-      'categories-page-1.xml',
-      'categories-page-2.xml',
-      'categories-page-3.xml'
+    'categories-page-1.xml',
+    'categories-page-2.xml',
+    'categories-page-3.xml'
   ));
 
   afterEach(mock.reset);
@@ -51,5 +50,29 @@ describe('mw category client tests', () => {
     let categories = await client.get({page: 3});
 
     expect(categories).toHaveLength(0);
+  });
+
+  test('should post when id undefined', async () => {
+
+    let data = {name: 'foo', externalId: 'ext-foo', isAdult: false};
+
+    mock.onPost('/categories', Client.payload(data))
+        .reply(201, '');
+
+    let post = await client.sync(data);
+
+    expect(post).toBeDefined()
+  });
+
+  test('should post when id undefined', async () => {
+
+    let data = {name: 'foo', externalId: 'ext-foo', isAdult: false, id:1};
+
+    mock.onPut('/categories', Client.payload(data))
+        .reply(204, '');
+
+    let post = await client.sync(data);
+
+    expect(post).toBeDefined()
   });
 });
