@@ -1,10 +1,21 @@
 const Router = require('koa-router');
 const catTree = require('../../category-trees');
+const _ = require('lodash');
 const Client = require('../../mw/client');
 
 const client = new Client('http://localhost:10006/rest', 'aTWsvir4jhYanftdWJZ');
 
 require('../../../mock/axios-mocks')(client);
+
+const onGet = async(ctx) =>{
+
+  let paths = ctx.request.query.paths.split(',');
+  let mwTree = catTree.tree(await client.all());
+  let searchResult = catTree.search(mwTree, ...paths);
+  ctx.body = _.chain(searchResult)
+    .map( (value, index)=>({path: paths[index], value:_.defaultTo(value, 'NOT FOUND')}))
+    .value()
+};
 
 const onPost = async (ctx) => {
 
@@ -29,4 +40,5 @@ const onPost = async (ctx) => {
   }
 };
 
-module.exports = new Router().post('/category-paths', onPost);
+module.exports = new Router().get('/category-paths', onGet)
+                             .post('/category-paths', onPost);
