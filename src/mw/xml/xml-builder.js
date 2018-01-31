@@ -1,7 +1,7 @@
 const xml2js = require('xml2js');
 const _ = require('lodash');
 
-const generate = (category) => {
+const build = (category) => {
 
   const builder = new xml2js.Builder({rootName: 'category'});
   const remapped = remap({$: category.$});
@@ -24,4 +24,4 @@ const generate = (category) => {
   }
 };
 
-module.exports = generate;
+module.exports = build;

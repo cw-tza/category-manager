@@ -1,6 +1,6 @@
-const generate = require('../../src/mw/xml-generator');
+const build = require('mw/xml/xml-builder');
 
-describe('generate tests', () => {
+describe('build tests', () => {
 
   test('should generate proper payload', async () => {
 
@@ -15,7 +15,7 @@ describe('generate tests', () => {
       }
     };
 
-    let generated = await generate(data);
+    let generated = await build(data);
 
     expect(generated).toContain(`<id type="integer">${data.$.id}</id>`);
     expect(generated).toContain(`<parent-id type="integer">${data.$.parentId}</parent-id>`);

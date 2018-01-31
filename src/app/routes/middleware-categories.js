@@ -1,18 +1,15 @@
+const Client = require('../../mw/client');
 const Router = require('koa-router');
 const catTree = require('../../category-trees');
-const Client = require('../../mw/client');
+const client = new Client('http://localhost:10006/rest', 'aTWsvir4jhYanftdWJZ');
 
-const router = new Router();
-const client = new Client('http://localhost:10006/rest', 'categories', 'aTWsvir4jhYanftdWJZ');
+const mocking = require('../../../mock/axios-mocks');
+
+mocking(client);
 
 const onGet = async ctx => {
-
   let mwCategories = await client.all();
-
   ctx.body = catTree.tree(mwCategories);
 };
 
-router.get('/middleware-categories', onGet);
-
-module.exports = router;
-
+module.exports = new Router().get('/middleware-categories', onGet);

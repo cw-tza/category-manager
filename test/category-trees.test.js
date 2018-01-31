@@ -1,24 +1,18 @@
-const testdata = require('./data/test-data');
-const parse = require('../src/mw/xml-parser');
-const catTrees = require('../src/category-trees');
-const util = require('../src/util');
+const testResources = require('./data/test-resources');
+const parse = require('mw/xml/xml-parser');
+const catTrees = require('category-trees');
 const _ = require('lodash');
 
 let payloads;
 
 beforeAll(async () => {
 
-  let files = await testdata(
-    'categories-page-1.xml',
-    'categories-page-2.xml',
-    'categories-page-3.xml'
-  );
-
-  let parsed = files.map(file => parse(file));
-
-  let categories = await Promise.all(parsed);
-
-  payloads = util.flatten(categories);
+  payloads = await testResources.onCategoryPages(
+    async (pages) => {
+      let parsed =   pages.map(file => parse(file));
+      let categories = await Promise.all(parsed);
+      return _.flatten(categories);
+    });
 });
 
 describe('category-tree tests', () => {

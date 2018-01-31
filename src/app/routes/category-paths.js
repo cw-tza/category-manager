@@ -2,8 +2,9 @@ const Router = require('koa-router');
 const catTree = require('../../category-trees');
 const Client = require('../../mw/client');
 
-const router = new Router();
-const client = new Client('http://localhost:10006/rest', 'categories', 'aTWsvir4jhYanftdWJZ');
+const client = new Client('http://localhost:10006/rest', 'aTWsvir4jhYanftdWJZ');
+
+require('../../../mock/axios-mocks')(client);
 
 const onPost = async (ctx) => {
 
@@ -11,9 +12,9 @@ const onPost = async (ctx) => {
 
   let mwTree = catTree.tree(await client.all());
   let merged = catTree.merge(mwTree, ...paths.map(catTree.pathAsTree));
-  let unsynced = catTree.treeFilter(merged, cat => cat.$.adi);
+  let fromAdi = catTree.treeFilter(merged, cat => cat.$.adi);
 
-  ctx.body = await syncRemaining(unsynced, []);
+  ctx.body = await syncRemaining(fromAdi, []);
 
   async function syncRemaining(remaining, synced) {
 
@@ -28,6 +29,4 @@ const onPost = async (ctx) => {
   }
 };
 
-router.post('/category-paths', onPost);
-
-module.exports = router;
+module.exports = new Router().post('/category-paths', onPost);
