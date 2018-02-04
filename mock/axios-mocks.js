@@ -1,22 +1,30 @@
-const MockAdapter = require('axios-mock-adapter');
-const testRes = require('../test/data/test-resources');
+const MockAdapter = require('axios-mock-adapter')
+const testData = require('../test/data/test-data')
+let mock
 
-module.exports = async client => {
+const init = async (client) => {
+  const pageParams = page => ({
+    params: {
+      page: page,
+      identifier_type: 'external_id'
+    }
+  })
 
-  const mock = new MockAdapter(client.axios);
+  let data = await testData.init()
+  mock = new MockAdapter(client.axios)
 
-  await testRes.onCategoryPages(pages => {
+  mock
+    .onGet('/categories', pageParams(1))
+    .reply(200, data[0])
+    .onGet('/categories', pageParams(2))
+    .reply(200, data[1])
+    .onGet('/categories', pageParams(3))
+    .reply(200, data[2])
+    .onAny()
 
-    const pageParams = page => ({params: {page: page, identifier_type: 'external_id'}});
+  return data
+}
 
-    mock.onGet('/categories', pageParams(1))
-        .reply(200, pages[0])
-        .onGet('/categories', pageParams(2))
-        .reply(200, pages[1])
-        .onGet('/categories', pageParams(3))
-        .reply(200, pages[2])
-      .onAny();
-  });
+const get = () => mock
 
-  return mock;
-};
+module.exports = {init, get}

@@ -1,15 +1,19 @@
-FROM node:latest
+FROM node:alpine
 
-# set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src
+RUN mkdir -p /home/category-manager/app
+WORKDIR /home/category-manager/app
 
-# add `/usr/src/node_modules/.bin` to $PATH
-ENV PATH /usr/src/node_modules/.bin:$PATH
+#VOLUME /config
 
-# install and cache app dependencies
-ADD package.json /usr/src/package.json
-RUN npm install
+COPY package.json .
+RUN npm install --production
 
-# start app
-CMD ["npm", "start"]
+#COPY config ../../../config
+COPY . .
+
+ADD https://github.com/Yelp/dumb-init/releases/download/v1.1.1/dumb-init_1.1.1_amd64 /usr/local/bin/dumb-init
+RUN chmod +x /usr/local/bin/dumb-init
+
+EXPOSE 8080
+
+CMD ["dumb-init","node", "client-router.js"]

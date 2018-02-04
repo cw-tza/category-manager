@@ -1,25 +1,21 @@
-const testResources = require('../../data/test-resources');
-const parse = require('mw/xml/xml-parser');
+const testData = require('../../data/test-data')
+const parse = require('mw/xml/category-xml-reader')
 
 describe('parse tests', () => {
-
-  let pages;
-
-  beforeAll(async () => await testResources.onCategoryPages(data=>pages=data));
+  // beforeAll(async () => await testResources.onCategoryPages(data => pages = data))
+  beforeAll(() => testData.init())
 
   test('should parse response payload', async () => {
+    let parsed = await parse(testData.categories(0))
 
-    let parsed = await parse(pages[0]);
-
-    expect(parsed).toBeDefined();
-    expect(parsed).toHaveLength(20);
-  });
+    expect(parsed).toBeDefined()
+    expect(parsed).toHaveLength(20)
+  })
 
   test('should parse empty response payload', async () => {
+    let parsed = await parse(testData.categories(2))
 
-    let parsed = await parse(pages[2]);
-
-    expect(parsed).toBeDefined();
-    expect(parsed).toHaveLength(0);
-  });
-});
+    expect(parsed).toBeDefined()
+    expect(parsed).toHaveLength(0)
+  })
+})

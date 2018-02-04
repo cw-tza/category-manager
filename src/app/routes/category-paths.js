@@ -1,44 +1,47 @@
-const Router = require('koa-router');
-const catTree = require('../../category-trees');
-const _ = require('lodash');
-const Client = require('../../mw/client');
+const Router = require('koa-router')
+const catTree = require('../../category-trees')
+const _ = require('lodash')
+const Client = require('../../mw/client/client-router')
 
-const client = new Client('http://localhost:10006/rest', 'aTWsvir4jhYanftdWJZ');
+const config = require('../../mw/client/client-factory')
+const client = new Client(config.get('portal').url, config.get('portal').token)
 
-require('../../../mock/axios-mocks')(client);
+// require('../../../mock/axios-mocks').init(client)
 
-const onGet = async(ctx) =>{
+const onGet = async (ctx) => {
+  let paths = ctx.request.query.paths.split(',')
 
-  let paths = ctx.request.query.paths.split(',');
-  let mwTree = catTree.tree(await client.all());
-  let searchResult = catTree.search(mwTree, ...paths);
-  ctx.body = _.chain(searchResult)
-    .map( (value, index)=>({path: paths[index], value:_.defaultTo(value, 'NOT FOUND')}))
-    .value()
-};
+  let mwTree = catTree.tree(await client.all())
+  let searchResult = catTree.search(mwTree, ...paths)
+
+  ctx.body = _.chain(searchResult).map((value, index) => ({
+    path: paths[index],
+    value: _.defaultTo(value, 'NOT FOUND')
+  })).value()
+}
 
 const onPost = async (ctx) => {
+  let paths = ctx.request.body
 
-  let paths = ctx.request.body;
+  let mwTree = catTree.tree(await client.all())
+  let merged = catTree.merge(mwTree, ...paths.map(catTree.pathAsTree))
+  let fromAdi = catTree.treeFilter(merged, cat => cat.$.adi)
 
-  let mwTree = catTree.tree(await client.all());
-  let merged = catTree.merge(mwTree, ...paths.map(catTree.pathAsTree));
-  let fromAdi = catTree.treeFilter(merged, cat => cat.$.adi);
+  ctx.body = await syncRemaining(fromAdi, [])
 
-  ctx.body = await syncRemaining(fromAdi, []);
-
-  async function syncRemaining(remaining, synced) {
+  async function syncRemaining (remaining, synced) {
+    const next = remaining.pop()
 
     if (!remaining.length) {
-      return synced;
+      return synced
     }
 
-    let next = remaining.pop();
-    await client.sync(next);
+    await client.sync(next)
 
-    return await syncRemaining(remaining, [...synced, next]);
+    return syncRemaining(remaining, [...synced, next])
   }
-};
+}
 
-module.exports = new Router().get('/category-paths', onGet)
-                             .post('/category-paths', onPost);
+module.exports = new Router()
+  .get('/category-paths', onGet)
+  .post('/category-paths', onPost)

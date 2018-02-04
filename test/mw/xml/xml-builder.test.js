@@ -1,27 +1,26 @@
-const build = require('mw/xml/xml-builder');
+const build = require('mw/xml/category-xml-writer')
 
 describe('build tests', () => {
-
   test('should generate proper payload', async () => {
-
     const data = {
       $: {
-        id              : 2,
-        isAdult         : true,
-        name            : 'BAR',
-        parentId        : 1,
-        externalId      : 'bar',
+        id: 2,
+        isAdult: true,
+        name: 'BAR',
+        parentId: 1,
+        externalId: 'bar',
         parentExternalId: 'foo'
       }
-    };
+    }
 
-    let generated = await build(data);
+    const generated = await build(data)
+    const $ = data.$
 
-    expect(generated).toContain(`<id type="integer">${data.$.id}</id>`);
-    expect(generated).toContain(`<parent-id type="integer">${data.$.parentId}</parent-id>`);
-    expect(generated).toContain(`<is-adult type="boolean">${data.$.isAdult}</is-adult>`);
-    expect(generated).toContain(`<name>${data.$.name}</name>`);
-    expect(generated).toContain(`<external-id>${data.$.externalId}</external-id>`);
-    expect(generated).toContain(`<parent-external-id>${data.$.parentExternalId}</parent-external-id>`);
-  });
-});
+    expect(generated).toContain(`<id type="integer">${$.id}</id>`)
+    expect(generated).toContain(`<parent-id type="integer">${$.parentId}</parent-id>`)
+    expect(generated).toContain(`<is-adult type="boolean">${$.isAdult}</is-adult>`)
+    expect(generated).toContain(`<name>${$.name}</name>`)
+    expect(generated).toContain(`<external-id>${$.externalId}</external-id>`)
+    expect(generated).toContain(`<parent-external-id>${$.parentExternalId}</parent-external-id>`)
+  })
+})

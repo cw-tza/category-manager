@@ -1,0 +1,16 @@
+{
+  "portal": {
+    "co": {
+      "url": "http://10.100.190.24:10380/rest",
+      "apiToken": "sV6vnjLVW7cgwTN83hwjE",
+      "vodServiceId": 2,
+      "defaultCoverId": 1
+    },
+    "cr": {
+      "url": "http://10.100.190.30:10380/rest",
+      "apiToken": "sV6vnjLVW7cgwTN83hwjE",
+      "vodServiceId": 2,
+      "defaultCoverId": 1
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "portal": {
+    "co": {
+      "url": "http://cubi-portal.co:10380/rest",
+      "apiToken": "lyCGFAHtFgoWP48cg2S7",
+      "vodServiceId": 2,
+      "defaultCoverId": 1
+    },
+    "cr": {
+      "url": "http://cubi-portal.cr:10380/rest",
+      "apiToken": "pi3wSumBx7xAaCwpmoNz",
+      "vodServiceId": 2,
+      "defaultCoverId": 1
+    }
+  }
+}
