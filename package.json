@@ -4,13 +4,17 @@
   "private": true,
   "scripts": {
     "start": "nodemon index.js",
-    "test": "jest --config jest.config.js --watch"
+    "test-watch": "jest --config jest.config.js --watch",
+    "test": "standard --fix && jest --config jest.config.js"
   },
   "nodemonConfig": {
     "delay": 2000,
     "ignore": [
       "*.test.js"
     ]
+  },
+  "standard": {
+    "env": "jest"
   },
   "dependencies": {
     "array-to-tree": "^2.2.1",
@@ -19,6 +23,7 @@
     "base-64": "^0.1.0",
     "body-parser": "~1.18.2",
     "boom": "^7.1.1",
+    "convict": "^4.0.2",
     "koa": "^2.4.1",
     "koa-bodyparser": "^4.2.0",
     "koa-logger": "^3.1.0",
@@ -28,6 +33,7 @@
     "qs": "latest",
     "semaphore": "^1.1.0",
     "uuid": "latest",
+    "winston": "^2.4.0",
     "xml2js": "^0.4.19",
     "xml2js-es6-promise": "^1.1.1"
   },
@@ -35,6 +41,7 @@
     "await-fs": "^1.0.0",
     "axios-mock-adapter": "latest",
     "jest": "^22.1.4",
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.11",
+    "standard": "^10.0.3"
   }
 }
